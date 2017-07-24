@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-    
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 
     <title>Team Hortus - Admin Page</title>
 
@@ -19,7 +19,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/angularCode.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -28,10 +28,12 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <script>
+    </script>
+
 </head>
 
-<body>
-
+<body ng-app="mainApp">
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -78,38 +80,42 @@
     <div class="container">
         <hr class="featurette-divider">
         <!-- First Featurette -->
-        <div class="featurette" id="about">
+        <div class="featurette" id="about" ng-controller="myCtrl">
             <img class="featurette-image img-circle img-responsive pull-right" src="http://placehold.it/500x500">
             <h2 class="featurette-heading">Grow Lights View Values
             </h2>
             <div class="col-sm-6">
                 <div class="panel panel-primary">
                     <div class="panel-heading">LED 1:</div>
-                    <div class="panel-body"><p id="viewLed1">1</p></div>
+                    <div class="panel-body">
+                        <label id="viewLed1">{{configurations.led1}}</label>
+                    </div>
                 </div>
                 <div class="panel panel-success">
                     <div class="panel-heading">LED 2:</div>
-                    <div class="panel-body"><p id="viewLed2">1</p></div>
+                    <div class="panel-body">
+                        <label id="viewLed2">{{configurations.led2}}</label>
+                    </div>
                 </div>
                 <div class="panel panel-warning">
                     <div class="panel-heading">LED 3:</div>
-                    <div class="panel-body"><label id="viewLed3">1</label></div>
+                    <div class="panel-body"><label id="viewLed3">{{configurations.led3}}</label></div>
                 </div>
                 <div class="panel panel-danger">
                     <div class="panel-heading">Fade Up Time:</div>
-                    <div class="panel-body"><label id="viewFadeUpTime">1</label></div>
+                    <div class="panel-body"><label id="viewFadeUpTime">{{configurations.fadeUpTime}}</label></div>
                 </div>
                 <div class="panel panel-primary">
                     <div class="panel-heading">Fade Up Duration:</div>
-                    <div class="panel-body"><label id="viewFadeUpDuration">1</label></div>
+                    <div class="panel-body"><label id="viewFadeUpDuration">{{configurations.fadeUpDuration}}</label></div>
                 </div>
                 <div class="panel panel-success">
                     <div class="panel-heading">Fade Down Time:</div>
-                    <div class="panel-body"><label id="viewFadeDownTime">1</label></div>
+                    <div class="panel-body"><label id="viewFadeDownTime">{{configurations.fadeDownTime}}</label></div>
                 </div>
                 <div class="panel panel-warning">
                     <div class="panel-heading">Fade Down Duration:</div>
-                    <div class="panel-body"><label id="viewFadeDownDuration">1</label></div>
+                    <div class="panel-body"><label id="viewFadeDownDuration">{{configurations.fadeDownDuration}}</label></div>
                 </div>
             </div>
         </div>
@@ -117,41 +123,41 @@
         <hr class="featurette-divider">
 
         <!-- Second Featurette -->
-        <div class="featurette" id="services">
+        <div class="featurette" id="services" ng-controller="editCtrl">
             <img class="featurette-image img-circle img-responsive pull-left" src="http://placehold.it/500x500">
             <h2 class="featurette-heading">Grow Lights Update Values
             </h2>
             <div class="col-sm-6">
-                <form>
-                <div class="form-group">
-                    <label for="led1">LED 1:</label>
-                    <input type="text" class="form-control" id="editLed1" required>
-                </div>
-                <div class="form-group">
-                    <label for="led1">LED 2:</label>
-                    <input type="text" class="form-control" id="editLed2" required>
-                </div>
-                <div class="form-group">
-                    <label for="led3">LED 3:</label>
-                    <input type="text" class="form-control" id="editLed3" required>
-                </div>
-                <div class="form-group">
-                    <label for="fadeUpTime">Fade Up Time:</label>
-                    <input type="text" class="form-control" id="editFadeUpTime" required>
-                </div>
-                <div class="form-group">
-                    <label for="fadeUpDuration">Fade Up Duration:</label>
-                    <input type="text" class="form-control" id="editFadeUpDuration" required>
-                </div>
-                <div class="form-group">
-                    <label for="fadeDownTime">Fade Down Time:</label>
-                    <input type="text" class="form-control" id="editFadeDownTime" required>
-                </div>
-                <div class="form-group">
-                    <label for="fadeDownDuration">Fade Down Duration:</label>
-                    <input type="text" class="form-control" id="editFadeDownDuration" required>
-                </div>
-                <button type="submit" class="btn btn-primary" id="editConfiguration">Update</button>
+                <form ng-submit="updateConfigurations()">
+                    <div class="form-group">
+                        <label for="led1">LED 1:</label>
+                        <input type="text" class="form-control" ng-model="configuration.led1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="led1">LED 2:</label>
+                        <input type="text" class="form-control" ng-model="configuration.led2" >
+                    </div>
+                    <div class="form-group">
+                        <label for="led3">LED 3:</label>
+                        <input type="text" class="form-control" ng-model="configuration.led3" >
+                    </div>
+                    <div class="form-group">
+                        <label for="fadeUpTime">Fade Up Time:</label>
+                        <input type="text" class="form-control" ng-model="configuration.fadeUpTime" >
+                    </div>
+                    <div class="form-group">
+                        <label for="fadeUpDuration">Fade Up Duration:</label>
+                        <input type="text" class="form-control" ng-model="configuration.fadeUpDuration" >
+                    </div>
+                    <div class="form-group">
+                        <label for="fadeDownTime">Fade Down Time:</label>
+                        <input type="text" class="form-control" ng-model="configuration.fadeDownTime" >
+                    </div>
+                    <div class="form-group">
+                        <label for="fadeDownDuration">Fade Down Duration:</label>
+                        <input type="text" class="form-control" ng-model="configuration.fadeDownDuration" >
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update</button>
                 </form>
             </div>
         </div>

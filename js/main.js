@@ -1,5 +1,13 @@
 var url = "http://teamhortus.herokuapp.com/data";
 
+angular.module('demo', [])
+.controller('Hello', function($scope, $http) {
+    $http.get('http://rest-service.guides.spring.io/greeting').
+        then(function(response) {
+            $scope.greeting = response.data;
+        });
+});
+
 $(document).ready(function () {
     console.log("document loaded");
 
@@ -29,6 +37,8 @@ $(document).ready(function () {
 
 $(window).on("load", function () {
     console.log("window loaded");
+
+
 
     /* $.get("http://teamhortus.herokuapp.com/data", function (data) {
          console.log("second complete");
@@ -87,6 +97,15 @@ $(window).on("load", function () {
          }
      }); */
 
+    let url = 'http://teamhortus.herokuapp.com/data';
+
+    /*fetch(url, { mode: 'no-cors' })
+        .then(res => { console.log(res) })
+        .then((out) => {
+            console.log('Checkout this JSON! ', out);
+        })
+        .catch(err => console.error(err));
+
     $.ajax({
         type: 'GET',
         url: 'http://teamhortus.herokuapp.com/data',
@@ -114,7 +133,21 @@ $(window).on("load", function () {
             $("#viewFadeDownTime").html(data.fadeDownTime);
             $("#viewFadeDownDuration").html(data.fadeDownDuration);
         }
-    });
+    }); */
+
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function () {
+        if (request.readyState === 4) {
+            if (request.status === 200) {
+                document.body.className = 'ok';
+                console.log(request.responseText);
+            } else {
+                document.body.className = 'error';
+            }
+        }
+    };
+    request.open("GET", url, true);
+    request.send(null);
 
 
 
