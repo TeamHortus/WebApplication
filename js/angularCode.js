@@ -1,66 +1,107 @@
-var app = angular.module('mainApp', []);
+var app = angular.module('mainApp', ['ngMaterial']);
 
-app.controller('recipesList', function ($scope, $http) {
+app.controller('recipesList', function ($scope, $http, $mdToast, $document) {
     $scope.configuration = {};
 
     //Activate Recipe
     $scope.setActive = function () {
-        $http({
-            method: "POST",
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            data: $.param($scope.configurations),
-            url: "https://teamhortus.herokuapp.com/data"
-        }).then(function mySuccess(response) {
-            console.log(response.status + "Activated.");
-            window.location.reload();
-        }, function myError(response) {
-            console.log('Error at ' + response.statusText);
-        });
+        if (!($scope.configurations == null)) {
+            $http({
+                method: "POST",
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                data: $.param($scope.configurations),
+                url: "https://teamhortus.herokuapp.com/data"
+            }).then(function mySuccess(response) {
+                $mdToast.show(
+                    $mdToast.simple()
+                        .textContent($scope.configurations.name + ' Recipe Activated!')
+                        .hideDelay(3000)
+                );
+                window.location.reload();
+            }, function myError(response) {
+                console.log('Error at ' + response.statusText);
+            });
+        } else {
+            $mdToast.show(
+                $mdToast.simple()
+                    .textContent('Select A Recipe to Activate!')
+                    .hideDelay(3000)
+            );
+        }
     }
 
     //Add New Recipe 
     $scope.addRecipe = function () {
-        $http({
-            method: "POST",
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            data: $.param($scope.config),
-            url: "https://teamhortus.herokuapp.com/recipes/add"
-        }).then(function mySuccess(response) {
-            window.location.reload();
-            console.log(response.status + "Saved.");
-        }, function myError(response) {
-            console.log('Error at ' + response.statusText);
-        });
+        if (!($scope.config == null)) {
+            $http({
+                method: "POST",
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                data: $.param($scope.config),
+                url: "https://teamhortus.herokuapp.com/recipes/add"
+            }).then(function mySuccess(response) {
+                window.location.reload();
+                console.log(response.status + "Saved.");
+            }, function myError(response) {
+                console.log('Error at ' + response.statusText);
+            });
+        } else {
+            $mdToast.show(
+                $mdToast.simple()
+                    .textContent('Enter Recipe Information to Add!')
+                    .hideDelay(3000)
+            );
+        }
     }
 
     //update Recipe 
     $scope.updateRecipe = function () {
-        $http({
-            method: "POST",
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            data: $.param($scope.configurations),
-            url: "https://teamhortus.herokuapp.com/recipes/update"
-        }).then(function mySuccess(response) {
-            console.log(response.status + "Updated.");
-            window.location.reload();
-        }, function myError(response) {
-            console.log('Error at ' + response.statusText);
-        });
+        if (!($scope.configurations == null) && $scope.configurations && $scope.configurations.name) {
+            $http({
+                method: "POST",
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                data: $.param($scope.configurations),
+                url: "https://teamhortus.herokuapp.com/recipes/update"
+            }).then(function mySuccess(response) {
+
+                $mdToast.show(
+                    $mdToast.simple()
+                        .textContent($scope.configurations.name + ' Recipe Updated!')
+                        .hideDelay(3000)
+                );
+                window.location.reload();
+            }, function myError(response) {
+                console.log('Error at ' + response.statusText);
+            });
+        } else {
+            $mdToast.show(
+                $mdToast.simple()
+                    .textContent('Select A Recipe to Update!')
+                    .hideDelay(3000)
+            );
+        }
     }
 
     //delete Recipe
     $scope.deleteRecipe = function () {
-        $http({
-            method: "POST",
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            data: $.param($scope.configurations),
-            url: "https://teamhortus.herokuapp.com/recipes/delete"
-        }).then(function mySuccess(response) {
-            console.log(response.status + "Deleted.");
-            window.location.reload();
-        }, function myError(response) {
-            console.log('Error at ' + response.statusText);
-        });
+        if (!($scope.configurations == null) && $scope.configurations && $scope.configurations.name) {
+            $http({
+                method: "POST",
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                data: $.param($scope.configurations),
+                url: "https://teamhortus.herokuapp.com/recipes/delete"
+            }).then(function mySuccess(response) {
+                console.log(response.status + "Deleted.");
+                window.location.reload();
+            }, function myError(response) {
+                console.log('Error at ' + response.statusText);
+            });
+        } else {
+            $mdToast.show(
+                $mdToast.simple()
+                    .textContent('Select A Recipe to Delete!')
+                    .hideDelay(3000)
+            );
+        }
     }
 
     //Load default configuration

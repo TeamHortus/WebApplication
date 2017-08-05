@@ -8,7 +8,14 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
     <title>Team Hortus - Admin Page</title>
 
@@ -141,17 +148,17 @@
             <h2 class="featurette-heading">Grow Lights Control Panel
             </h2>
             <div class="col-lg-4 ">
-                    <h3> Recipes List <button class="btn btn-info pull-right" data-toggle="modal" data-target="#addRecipe">Add New Recipe</button></h3>
-                    
-                
+                <h3> Recipes List <button type="button" class="btn btn-info pull-right" data-toggle="modal" data-target="#addRecipe">Add New Recipe</button></h3>
+
+
                 <ul class="list-group" ng-repeat="recipe in recipes">
                     <li id="recipe._id" ng-cloak ng-click="recipeSelected(recipe._id, $index)" ng-model="recipe._id" ng-class="{'active': $index == selected}"
                         class="list-group-item">{{recipe.name}}</li>
                 </ul>
-                
+
             </div>
             <div class="col-sm-8">
-                <h3> Recipes Information <button ng-click="setActive()" class="btn btn-primary pull-right">Set As Active Recipe</button></h3>
+                <h3> Recipes Information <button type="button" ng-click="setActive()" class="btn btn-primary pull-right">Set As Active Recipe</button></h3>
                 <form ng-submit="updateRecipe()">
                     <input type="hidden" ng-model="configurations._id" class="form-control" ng-value="configurations._id" />
                     <div class="form-group">
@@ -194,7 +201,7 @@
                             <button class="form-control" type="reset" value="reset">Reset</button>
                         </div>
                         <div class="col-sm-2">
-                            <button ng-click="deleteRecipe()" class="btn btn-danger">Delete Recipe</button>
+                            <button type="button" ng-click="deleteRecipe()" class="btn btn-danger">Delete Recipe</button>
                         </div>
                     </div>
                 </form>
