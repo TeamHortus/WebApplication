@@ -15,6 +15,7 @@ app.controller('recipesList', function ($scope, $http, $mdToast, $document) {
                 $mdToast.show(
                     $mdToast.simple()
                         .textContent($scope.configurations.name + ' Recipe Activated!')
+                        .position('bottom right')
                         .hideDelay(3000)
                 );
                 window.location.reload();
@@ -23,8 +24,9 @@ app.controller('recipesList', function ($scope, $http, $mdToast, $document) {
             });
         } else {
             $mdToast.show(
-                $mdToast.simple()
+                $mdToast.simple({toastClass: 'error'})
                     .textContent('Select A Recipe to Activate!')
+                    .position('bottom right')
                     .hideDelay(3000)
             );
         }
@@ -48,6 +50,7 @@ app.controller('recipesList', function ($scope, $http, $mdToast, $document) {
             $mdToast.show(
                 $mdToast.simple()
                     .textContent('Enter Recipe Information to Add!')
+                    .position('bottom right')
                     .hideDelay(3000)
             );
         }
@@ -66,6 +69,7 @@ app.controller('recipesList', function ($scope, $http, $mdToast, $document) {
                 $mdToast.show(
                     $mdToast.simple()
                         .textContent($scope.configurations.name + ' Recipe Updated!')
+                        .position('bottom right')
                         .hideDelay(3000)
                 );
                 window.location.reload();
@@ -76,6 +80,7 @@ app.controller('recipesList', function ($scope, $http, $mdToast, $document) {
             $mdToast.show(
                 $mdToast.simple()
                     .textContent('Select A Recipe to Update!')
+                    .position('bottom right')
                     .hideDelay(3000)
             );
         }
@@ -99,6 +104,7 @@ app.controller('recipesList', function ($scope, $http, $mdToast, $document) {
             $mdToast.show(
                 $mdToast.simple()
                     .textContent('Select A Recipe to Delete!')
+                    .position('bottom right')
                     .hideDelay(3000)
             );
         }
