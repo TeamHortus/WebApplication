@@ -23,6 +23,10 @@ body {
     padding: 120px 0;
 }
 
+.sel {
+    color:red
+}
+
 .headline h1 {
     font-size: 130px;
     background: #fff;

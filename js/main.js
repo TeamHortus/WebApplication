@@ -69,7 +69,7 @@ $(window).on("load", function () {
             console.log("data");
             console.log(data[0]);
 
-            $("#viewLed2").html(data[0].led1);
+            $("#viewLed1").html(data[0].led1);
             $("#viewLed2").html(data[0].led2);
             $("#viewLed3").html(data.led3);
             $("#viewFadeUpTime").html(data.fadeUpTime);
